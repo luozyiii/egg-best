@@ -29,3 +29,40 @@ ctx.query
 // 二、http://127.0.0.1:7001/user/detail2/100
 ctx.params
 ```
+
+### Egg.js 路由中 post.put.delete等请求的处理及参数校验
+- 暂时关闭csrf防御
+```
+// 学习阶段暂时关闭csrf 防御
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
+```
+
+- post、put获取参数
+```
+ctx.request.body
+```
+
+- 利用postman 发起post请求
+
+- egg-validate
+
+```
+// 安装
+yarn add egg-validate
+
+// 在/config/plugin.js增加配置
+exports.validate = {
+  enable: true,
+  package: 'egg-validate',
+};
+```
+- 单元测试
+单元测试 在 ／test/app/controller/user.test.js 
+add、edit、del
+
+
+

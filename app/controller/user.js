@@ -33,6 +33,37 @@ class UserController extends Controller {
     console.log(ctx.params);
     ctx.body = ctx.params.id;
   }
+
+  // add user
+  // post 请求 参数的获取
+  async add() {
+    const { ctx } = this;
+    console.log(ctx.request.body);
+    const rules = {
+      name: { type: 'string' },
+      age: { type: 'number' },
+    };
+    ctx.validate(rules); // 利用egg-validate 插件对参数进行校验
+    ctx.body = {
+      status: 200,
+      data: ctx.request.body,
+    };
+  }
+
+  // put 请求
+  async edit() {
+    const { ctx } = this;
+    ctx.body = {
+      status: 200,
+      data: ctx.request.body,
+    };
+  }
+
+  // delete 请求
+  async del() {
+    const { ctx } = this;
+    ctx.body = ctx.request.body.id;
+  }
 }
 
 module.exports = UserController;

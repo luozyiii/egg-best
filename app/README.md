@@ -259,3 +259,8 @@ module.exports = app => {
 
 ```
 
+### Egg.js 中使用 HttpClient 请求其他接口
+- 目录
+/app/controller/curl.js
+
+

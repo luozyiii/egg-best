@@ -1,4 +1,6 @@
-## egg
+# Egg.js
+
+## Egg.js 基础--路由控制器服务模板引擎
 
 ### 控制器（controller）的使用和单元测试
 - 目录： /app/controller/user
@@ -135,6 +137,36 @@ config.view = {
 };
 
 ```
+
+### Ejs 模版引擎中静态资源的使用和配置
+- 目录
+/public/*
+```
+http://127.0.0.1:7001/public/css/user.css
+```
+
+- 内置了egg-static 插件 处理静态资源
+egg-static 是基于koajs static-cache 的二次封装
+
+- 自定义配置
+```
+// 静态资源的配置 egg-static 将资源的存放目录更改为 app/assets
+config.static = {
+  prefix: '/assets/',
+  dir: path.join(appInfo.baseDir, 'app/assets'),
+};
+```
+
+- 页面上引用
+```
+// css
+<link rel="stylesheet" type="text/css" href="public/css/user.css" />
+// img
+<img src="public/img/2.jpeg" />
+// js
+<script src="public/js/user.js"></script>
+```
+
 
 
 

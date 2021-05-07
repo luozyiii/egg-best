@@ -31,3 +31,18 @@ $ npm stop
 
 
 [egg]: https://eggjs.org
+
+### node 知识整理
+- 源码目录
+/app/node/
+
+### Egg.js基础-路由控制器服务模板引擎
+- 源码目录
+/app/controller/*
+/app/service/*
+/app/router.js
+/test/app/controller/*
+/test/app/service/*
+
+
+

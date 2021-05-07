@@ -6,7 +6,12 @@ class UserController extends Controller {
   // egg 框架强制 controller 内的方法都是异步方法
   async index() {
     const { ctx } = this;
-    ctx.body = 'user index';
+    // ctx.body = 'user index';
+    await ctx.render('user.html', {
+      id: 100,
+      name: 'admin',
+      list: [ 'html', 'js', 'css' ],
+    });
   }
 
   async lists() {

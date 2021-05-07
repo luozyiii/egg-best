@@ -80,4 +80,61 @@ assert(user);
 assert(user.id === 10);
 ```
 
+### Egg.js 中使用Ejs模板引擎
+- 后端渲染由来已久，渲染性能得到业界的认可
+- 利于SEO优化，对纯展示类网站体验较好
+- 对前后端分离开发模式的补充（单点登录的登录页面）
+
+```
+yarn add egg-view-ejs // 安装
+
+// 在config plugin.js 配置
+exports.ejs = {
+  enable: true,
+  package: 'egg-view-ejs',
+};
+
+
+// 在 config.default.js 配置
+config.view = {
+  mapping: {
+    '.html': 'ejs',
+  },
+};
+
+config.ejs = {
+
+};
+
+// 应用 
+/app/controller/user  index
+/view/user.html
+
+// 模板引擎的分隔符全局和局部配置
+// 全局 config.default.js
+config.ejs = {
+  delimiter: '$', // 全局修改分隔符
+};
+
+// 局部配置
+await ctx.render('user.html', {
+  id: 100,
+  name: 'admin',
+  list: [ 'html', 'js', 'css' ],
+}, {
+  delimiter: '$',
+});
+
+
+// 模板引擎目录的配置
+config.view = {
+  mapping: {
+    '.html': 'ejs',
+  },
+  root: path.join(appInfo.baseDir, 'app/html'), // 自定义模板目录 root还支持数组 [path.join(appInfo.baseDir, 'app/html'), path.join(appInfo.baseDir, 'app/view')]
+};
+
+```
+
+
 

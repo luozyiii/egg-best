@@ -11,6 +11,18 @@
   <% include user-header.html %>
   user page...
   <br />
+  <button onclick="login()">登录</button><br />
+  <button onclick="logout()">注销</button><br />
+
+  <% if(user) { %>
+    已经登录<%= user.name %>
+  <% }else { %>
+    未登录
+  <% } %>
+
+  <br />
+  <div>中文zh:<%= zh %></div>
+  <div>中文base64:<%= base64 %></div>
   id:<%= id %>
   <br />
   <%# 注释 %>
@@ -21,7 +33,7 @@
       <li><%= list[i] %></li>
     <% } %>
   </ul>
-  <img src="public/img/2.jpeg" />
+  <img style="width:200px" src="public/img/2.jpeg" />
   <script src="public/js/user.js"></script>
 </body>
 </html>

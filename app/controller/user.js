@@ -3,14 +3,40 @@
 const Controller = require('egg').Controller;
 
 class UserController extends Controller {
+  encode(str) {
+    return new Buffer(str).toString('base64');
+  }
+  decode(str) {
+    return new Buffer(str, 'base64').toString();
+  }
   // egg 框架强制 controller 内的方法都是异步方法
   async index() {
     const { ctx } = this;
     // ctx.body = 'user index';
+    const user = ctx.cookies.get('user');
+
+    // ctx.cookies.set('zh', '测试'); // 报错
+    // 方案一： 加密/解密
+    ctx.cookies.set('zh', '测试', {
+      encrypt: true,
+    });
+    const zh = ctx.cookies.get('zh', {
+      encrypt: true,
+    });
+    console.log(zh);
+
+    // 方案二: base64
+    ctx.cookies.set('base64', this.encode('中文base64'));
+    const base64 = this.decode(ctx.cookies.get('base64'));
+    console.log(base64);
+
     await ctx.render('user.html', {
       id: 100,
       name: 'admin',
       list: [ 'html', 'js', 'css' ],
+      user: user ? JSON.parse(user) : null,
+      zh,
+      base64,
     });
   }
 
@@ -71,6 +97,29 @@ class UserController extends Controller {
   async del() {
     const { ctx } = this;
     ctx.body = ctx.request.body.id;
+  }
+
+  // login
+  async login() {
+    const { ctx } = this;
+    const body = ctx.request.body;
+    ctx.cookies.set('user', JSON.stringify(body), {
+      maxAge: 1000 * 60 * 10,
+      // httpOnly: false,
+    });
+    ctx.body = {
+      status: 200,
+      data: body,
+    };
+  }
+
+  // logout
+  async logout() {
+    const { ctx } = this;
+    ctx.cookies.set('user', null);
+    ctx.body = {
+      status: 200,
+    };
   }
 }
 

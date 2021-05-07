@@ -167,6 +167,36 @@ config.static = {
 <script src="public/js/user.js"></script>
 ```
 
+### Egg.js 中 Cookie 的配置和使用以及如何设置中文cookie 
+- 示例：登录/注销
+```
+http://127.0.0.1:7001/user
 
+ctx.cookies.set('user', JSON.stringify(body), {
+  maxAge: 1000 * 60 * 10,
+  httpOnly: false,
+});
+
+ctx.cookies.set('user', null);
+
+```
+
+- egg 框架中无法直接设置中文cookie
+（将中文转化成字符串）
+```
+// 方案一：加密/解密
+ctx.cookies.set('zh', '测试', {
+  encrypt: true,
+});
+const zh = ctx.cookies.get('zh', {
+  encrypt: true,
+});
+console.log(zh);
+
+// 方案二：base64
+ctx.cookies.set('base64', this.encode('中文base64'));
+const base64 = this.decode(ctx.cookies.get('base64'));
+console.log(base64);
+```
 
 

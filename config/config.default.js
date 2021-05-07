@@ -24,6 +24,11 @@ module.exports = appInfo => {
     type: 'all',
   };
 
+  // 插件auth 配置
+  config.auth = {
+    exclude: [ '/home', '/user', '/login', '/logout' ],
+  };
+
   // 学习阶段暂时关闭csrf 防御
   config.security = {
     csrf: {

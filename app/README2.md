@@ -79,3 +79,32 @@ module.exports = options => {
 - Helper
 属性拓展 /extend/helper.js
 
+### 插件
+- 中间件更适合处理请求，插件可以处理业务逻辑。
+- Egg.js的插件相当于一个微型应用
+- 插件不包含router.js和controller控制器
+
+- 目录
+/lib/plugin/egg-auth
+插件命名规则：egg- 开头；eg: egg-auth
+
+- 启用插件
+```
+// /config/plugin.js
+const path = require('path');
+
+exports.auth = {
+  enable: true,
+  path: path.join(__dirname, '../lib/plugin/egg-auth'),
+};
+
+//  额外的配置 /app.js
+app.config.coreMiddleware.push('auth');
+
+// config.default.js
+// 插件auth 配置
+config.auth = {
+  exclude: [ '/home', '/user', '/login', '/logout' ],
+};
+
+```

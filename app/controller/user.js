@@ -24,7 +24,10 @@ class UserController extends Controller {
     const { ctx } = this;
     // http://127.0.0.1:7001/user/detail?id=123&name=leilie
     // 获取参数id和name
-    console.log(ctx.query); // 在终端查看
+    // console.log(ctx.query); // 在终端查看
+    // ctx.body = ctx.query.id;
+    const res = ctx.service.user.detail(10);
+    console.log(res);
     ctx.body = ctx.query.id;
   }
   async detail2() {

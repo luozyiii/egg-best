@@ -65,4 +65,19 @@ exports.validate = {
 add、edit、del
 
 
+### Egg.js 中 Service 服务和单元测试
+service 在egg 上挂载到ctx(上下文)
+
+- 目录
+/app/service/user.js 在controller detaill 中应用
+
+- 单元测试
+/test/app/service/user.test.js
+```
+const ctx = app.mockContext();
+const user = await ctx.service.user.detail(10);
+assert(user);
+assert(user.id === 10);
+```
+
 

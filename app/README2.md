@@ -60,3 +60,22 @@ module.exports = options => {
 };
 ```
 
+### 丰富的拓展方式
+[框架拓展](https://eggjs.org/zh-cn/basics/extend.html)
+/app/extend/*
+
+- Application
+方法拓展和属性拓展 /extend/application.js
+
+- Context
+方法拓展和属性拓展 /extend/context.js
+
+- Request
+属性拓展 /extend/request.js
+
+- Response
+属性拓展 /extend/response.js
+
+- Helper
+属性拓展 /extend/helper.js
+

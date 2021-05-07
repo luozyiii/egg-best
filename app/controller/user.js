@@ -3,10 +3,10 @@
 const Controller = require('egg').Controller;
 
 class UserController extends Controller {
-  encode(str) {
+  encode(str = '') {
     return new Buffer(str).toString('base64');
   }
-  decode(str) {
+  decode(str = '') {
     return new Buffer(str, 'base64').toString();
   }
   // egg 框架强制 controller 内的方法都是异步方法
@@ -14,6 +14,11 @@ class UserController extends Controller {
     const { ctx } = this;
     // ctx.body = 'user index';
     const user = ctx.cookies.get('user');
+
+    // 获取session
+    const session = ctx.session.user;
+    const zhSession = ctx.session.zh;
+    console.log('session:', session, zhSession);
 
     // ctx.cookies.set('zh', '测试'); // 报错
     // 方案一： 加密/解密
@@ -29,6 +34,7 @@ class UserController extends Controller {
     ctx.cookies.set('base64', this.encode('中文base64'));
     const base64 = this.decode(ctx.cookies.get('base64'));
     console.log(base64);
+
 
     await ctx.render('user.html', {
       id: 100,
@@ -107,6 +113,9 @@ class UserController extends Controller {
       maxAge: 1000 * 60 * 10,
       // httpOnly: false,
     });
+    // 保存session
+    ctx.session.user = body;
+    ctx.session.zh = '中文测试';
     ctx.body = {
       status: 200,
       data: body,
@@ -117,6 +126,10 @@ class UserController extends Controller {
   async logout() {
     const { ctx } = this;
     ctx.cookies.set('user', null);
+
+    // 清除session
+    ctx.session.user = null;
+    ctx.session.zh = null;
     ctx.body = {
       status: 200,
     };

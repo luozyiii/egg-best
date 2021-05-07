@@ -45,6 +45,14 @@ module.exports = appInfo => {
   //   dir: path.join(appInfo.baseDir, 'app/assets'),
   // };
 
+  // session 配置
+  config.session = {
+    key: 'BEST',
+    httpOnly: false,
+    maxAge: 1000 * 50,
+    renew: true,
+  };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

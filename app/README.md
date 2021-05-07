@@ -199,4 +199,63 @@ const base64 = this.decode(ctx.cookies.get('base64'));
 console.log(base64);
 ```
 
+### Egg.js 中 Session 的配置和使用
+- Cookie与Session区别
+|  异同   | Cookie  | Session |
+|  ----   | ----    | ---- |
+| 存储数据  | 是，存储在浏览器 | 是，存储在浏览器、内存、或者redis等其他数据源中 |
+| 操作环境  | 客户端和服务端均可操作 | 服务端操作session |
+| 大小限制  | 有大小限制并且不同浏览器存储cookie的个数也有不同 | 没有大小限制但和服务器的内存的大小有关；但如果session保存到cookie里会受到浏览器的限制 |
+| 是否唯一  | 是，不同用户cookie存放在各自的客户端 | 是，服务端会给每个用户创建唯一的session对象 |
+| 安全问题  | 有安全隐患，通过拦截本地文件找到cookie后可以进行攻击 | 安全性高，浏览器可以获取session但难以解析 |
+| 常用场景  | 判断用户是否登录 | 保存用户信息 |
+
+- 如何操作Session
+```
+// 保存
+ctx.session.user = body;
+ctx.session.zh = '中文测试'; // 支持中文
+```
+
+// 获取session
+const session = ctx.session.user;
+const zhSession = ctx.session.zh;
+console.log('session:', session, zhSession);
+
+// 清除session
+ctx.session.user = null;
+ctx.session.zh = null;
+
+// config.default.js session 配置key
+config.session = {
+  key: 'BEST',
+  httpOnly: false,
+  maxAge: 1000 * 5,
+  renew: true,
+};
+
+- Session的拓展: 我们只需要设置 app.sessionStore，即可将 Session 存储到指定的存储中
+[session拓展存储](https://eggjs.org/zh-cn/core/cookie-and-session.html#%E6%89%A9%E5%B1%95%E5%AD%98%E5%82%A8)
+```
+// 根目录添加app.js
+
+'use strict';
+
+module.exports = app => {
+  const store = {};
+  app.sessionStore = {
+    async get(key) {
+      console.log('---store---', store);
+      return store[key];
+    },
+    async set(key, value, maxAge) {
+      store[key] = value;
+    },
+    async destroy(key) {
+      store[key] = null;
+    },
+  };
+};
+
+```
 

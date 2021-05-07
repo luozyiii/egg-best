@@ -55,12 +55,12 @@ module.exports = appInfo => {
   // };
 
   // session 配置
-  config.session = {
-    key: 'BEST',
-    httpOnly: false,
-    maxAge: 1000 * 50,
-    renew: true,
-  };
+  // config.session = {
+  //   key: 'BEST',
+  //   httpOnly: false,
+  //   maxAge: 1000 * 50,
+  //   renew: true,
+  // };
 
   // add your user config here
   const userConfig = {

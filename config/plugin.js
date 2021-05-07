@@ -16,3 +16,8 @@ exports.auth = {
   enable: true,
   path: path.join(__dirname, '../lib/plugin/egg-auth'),
 };
+
+exports.info = {
+  enable: true,
+  path: path.join(__dirname, '../lib/plugin/egg-info'),
+};

@@ -108,3 +108,50 @@ config.auth = {
 };
 
 ```
+
+### Egg.js 定时任务
+- 定时上报应用状态，便于系统监控
+- 定时从远程接口更新数据
+- 定时处理文件（清除过期日志文件）
+
+#### 编写获取本机系统信息插件egg-info
+- 目录
+/lib/plugin/egg-info
+
+- 启用插件
+```
+// /config/plugin.js
+const path = require('path');
+
+exports.info = {
+  enable: true,
+  path: path.join(__dirname, '../lib/plugin/egg-info'),
+};
+```
+
+- 创建定时任务
+目录：/app/schedule/get_info.js
+
+```
+'use strict';
+
+// 定时任务：每隔3秒 打印本机状态信息
+const Subscription = require('egg').Subscription;
+
+class getInfo extends Subscription {
+  static get schedule() {
+    return {
+      interval: 3000, // 每3秒执行一次
+      // cron: '0 0 */3 * * *', // 每三小时准点执行一次
+      type: 'worker',
+    };
+  }
+  async subscribe() {
+    const info = this.ctx.info;
+    console.log(Date.now(), info);
+  }
+}
+
+module.exports = getInfo;
+
+```

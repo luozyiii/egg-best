@@ -163,6 +163,6 @@ module.exports = getInfo;
 ### Mysql入门，基础增删改查操作
 /demo.sql
 
-### 使用egg-mysql插件操作数据库
+### 使用egg-mysql插件操作数据库 (中小型业务需求,不适合分页，多表联查)
 
 ### Egg.js 中使用 Sequelize 操作 mysql 数据库

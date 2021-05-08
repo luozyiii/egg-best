@@ -42,6 +42,20 @@ module.exports = appInfo => {
     },
   };
 
+  // sequelize
+  config.sequelize = {
+    dialect: 'mysql',
+    host: '127.0.0.1',
+    port: '3306',
+    user: 'root',
+    password: 'luo924361501',
+    database: 'egg',
+    define: {
+      timestamps: false,
+      freezeTableName: true,
+    },
+  };
+
   // 学习阶段暂时关闭csrf 防御
   config.security = {
     csrf: {

@@ -199,3 +199,44 @@ config.mysql = {
 ```
 
 ### Egg.js 中使用 Sequelize 操作 mysql 数据库
+```
+// 安装
+yarn add egg-sequelize mysql2
+
+// plugin 配置
+exports.sequelize = {
+  enable: true,
+  package: 'egg-sequelize',
+};
+
+// config.default.js 配置
+config.sequelize = {
+  dialect: 'mysql',
+  host: '127.0.0.1',
+  port: '3306',
+  user: 'root',
+  password: 'luo924361501',
+  database: 'egg',
+  define: {
+    timestamps: false,
+    freezeTableName: true,
+  },
+};
+
+// app 下 新建文件夹model/user.js 模型
+
+'use strict';
+module.exports = app => {
+  const { STRING, INTEGER } = app.Sequelize;
+  const User = app.model.define('user', {
+    id: { type: INTEGER, primaryKey: true, autoIncrement: true },
+    name: STRING(20),
+    pwd: STRING(50),
+  });
+  return User;
+};
+
+// 实践 /app/service/user.js
+增删改查
+
+```

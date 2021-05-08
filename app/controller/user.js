@@ -68,9 +68,8 @@ class UserController extends Controller {
     // 获取参数id和name
     // console.log(ctx.query); // 在终端查看
     // ctx.body = ctx.query.id;
-    const res = ctx.service.user.detail(10);
-    console.log(res);
-    ctx.body = ctx.query.id;
+    const res = await ctx.service.user.detail(ctx.query.id);
+    ctx.body = res;
   }
   async detail2() {
     const { ctx } = this;
@@ -109,22 +108,24 @@ class UserController extends Controller {
     const { ctx } = this;
     // 数据库新增数据
     const res = await ctx.service.user.edit(ctx.request.body);
-    ctx.body = {
-      status: 200,
-      // data: ctx.request.body,
-      data: res,
-    };
+    // ctx.body = {
+    //   status: 200,
+    //   // data: ctx.request.body,
+    //   data: res,
+    // };
+    ctx.body = res;
   }
 
   // delete 请求
   async del() {
     const { ctx } = this;
     const res = await ctx.service.user.delete(ctx.request.body.id);
-    ctx.body = {
-      status: 200,
-      // data: ctx.request.body.id,
-      data: res,
-    };
+    // ctx.body = {
+    //   status: 200,
+    //   // data: ctx.request.body.id,
+    //   data: res,
+    // };
+    ctx.body = res;
   }
 
   // login

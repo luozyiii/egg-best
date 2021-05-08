@@ -155,3 +155,14 @@ class getInfo extends Subscription {
 module.exports = getInfo;
 
 ```
+
+## Egg.js 操作Mysql数据库(待完善)
+
+### 安装Mysql数据库
+
+### Mysql入门，基础增删改查操作
+/demo.sql
+
+### 使用egg-mysql插件操作数据库
+
+### Egg.js 中使用 Sequelize 操作 mysql 数据库

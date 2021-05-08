@@ -29,6 +29,19 @@ module.exports = appInfo => {
     exclude: [ '/home', '/user', '/login', '/logout' ],
   };
 
+  // 数据库 mysql
+  config.mysql = {
+    app: true,
+    agent: false,
+    client: {
+      host: '127.0.0.1',
+      port: '3306',
+      user: 'root',
+      password: 'luo924361501',
+      database: 'egg',
+    },
+  };
+
   // 学习阶段暂时关闭csrf 防御
   config.security = {
     csrf: {

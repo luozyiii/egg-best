@@ -6,8 +6,8 @@ const Subscription = require('egg').Subscription;
 class getInfo extends Subscription {
   static get schedule() {
     return {
-      interval: 3000, // 每3秒执行一次
-      // cron: '0 0 */3 * * *', // 每三小时准点执行一次
+      // interval: 3000, // 每3秒执行一次
+      cron: '0 0 */3 * * *', // 每三小时准点执行一次
       type: 'worker',
     };
   }

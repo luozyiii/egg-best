@@ -47,13 +47,18 @@ class UserController extends Controller {
   }
 
   async lists() {
-    const { ctx } = this;
-    await new Promise(resolve => {
-      setTimeout(() => {
-        resolve();
-      }, 1500);
-    });
-    ctx.body = [{ id: 123 }];
+    const { ctx, app } = this;
+    // console.log('app.mysql:', app.mysql);
+    // await new Promise(resolve => {
+    //   setTimeout(() => {
+    //     resolve();
+    //   }, 1500);
+    // });
+    // ctx.body = [{ id: 123 }];
+
+    // 数据库查询
+    const res = await ctx.service.user.lists();
+    ctx.body = res;
   }
 
   // get 请求的处理方式; 获取参数
@@ -70,8 +75,12 @@ class UserController extends Controller {
   async detail2() {
     const { ctx } = this;
     // http://127.0.0.1:7001/user/detail2/100
-    console.log(ctx.params);
-    ctx.body = ctx.params.id;
+    // console.log(ctx.params);
+    // ctx.body = ctx.params.id;
+
+    // 数据库查询 通过id
+    const res = await ctx.service.user.detail2(ctx.params.id);
+    ctx.body = res;
   }
 
   // add user
@@ -79,30 +88,43 @@ class UserController extends Controller {
   async add() {
     const { ctx } = this;
     console.log(ctx.request.body);
-    const rules = {
-      name: { type: 'string' },
-      age: { type: 'number' },
-    };
-    ctx.validate(rules); // 利用egg-validate 插件对参数进行校验
+    // const rules = {
+    //   name: { type: 'string' },
+    //   age: { type: 'number' },
+    // };
+    // ctx.validate(rules); // 利用egg-validate 插件对参数进行校验
+
+    // 数据库新增数据
+    const res = await ctx.service.user.add(ctx.request.body);
+
     ctx.body = {
       status: 200,
-      data: ctx.request.body,
+      // data: ctx.request.body,
+      data: res,
     };
   }
 
   // put 请求
   async edit() {
     const { ctx } = this;
+    // 数据库新增数据
+    const res = await ctx.service.user.edit(ctx.request.body);
     ctx.body = {
       status: 200,
-      data: ctx.request.body,
+      // data: ctx.request.body,
+      data: res,
     };
   }
 
   // delete 请求
   async del() {
     const { ctx } = this;
-    ctx.body = ctx.request.body.id;
+    const res = await ctx.service.user.delete(ctx.request.body.id);
+    ctx.body = {
+      status: 200,
+      // data: ctx.request.body.id,
+      data: res,
+    };
   }
 
   // login

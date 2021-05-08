@@ -159,10 +159,43 @@ module.exports = getInfo;
 ## Egg.js 操作Mysql数据库(待完善)
 
 ### 安装Mysql数据库
+- windows
+[windows10上安装mysql](https://blog.csdn.net/zhouzezhou/article/details/52446608)
+[navicat_for_mysql](https://www.cnblogs.com/william-dai/p/12784619.html)
 
 ### Mysql入门，基础增删改查操作
 /demo.sql
 
 ### 使用egg-mysql插件操作数据库 (中小型业务需求,不适合分页，多表联查)
+```
+// 安装 
+yarn add egg-mysql
+
+// plugin 配置
+exports.mysql = {
+  enable: true,
+  package: 'egg-mysql',
+};
+
+// config.default.js 配置
+config.mysql = {
+  app: true,
+  agent: false,
+  client: {
+    host: '127.0.0.1',
+    port: '3306',
+    user: 'root',
+    password: 'luo924361501',
+    database: 'egg',
+  },
+};
+
+```
+
+- 实践
+```
+/app/controller/user.js
+/app/service/user.js
+```
 
 ### Egg.js 中使用 Sequelize 操作 mysql 数据库

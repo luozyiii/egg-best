@@ -156,12 +156,21 @@ module.exports = getInfo;
 
 ```
 
-## Egg.js 操作Mysql数据库(待完善)
+## Egg.js 操作Mysql数据库
 
 ### 安装Mysql数据库
 - windows
 [windows10上安装mysql](https://blog.csdn.net/zhouzezhou/article/details/52446608)
 [navicat_for_mysql](https://www.cnblogs.com/william-dai/p/12784619.html)
+
+- mac
+```
+// 安装
+brew install mysql
+// 遇到问题 brew版本低，mac os 版本低，xcode版本低不支持下载； 都更新一遍才安装上mysql; 最后 mac os 13.1, xcode 12.5, mysql 8
+// 安装后-> 去到系统偏好设置找到mysql, ->  我选择了use strong password encryption 强密码模式， egg-mysql 连接不上，报错用工具nacicat 能连上数据；重新选择 Use Legacy Password Encryption 才可连接上。
+```
+[navicat](https://www.macwk.com/soft/navicat-premium?__cf_chl_jschl_tk__=bcf60bc1145838338fc0192159d4ab4747a2cd78-1620482097-0-AZGUupDdI0N1q6UGh45rDNCJj1O93BCTT-dir5BJ0nVxQvC2Q-hs6xQ8CgwD7y_LFNpQ0LN3pUzYLYNDu2ScXbJ0z8ZQL4QGU76ZFCHsJJkpKufjBMwdU3up4lLnGypsmStQfAyCwZKEMRLKjWRzJdQfVocI_oezODLeoNptaX7ldHaxTuZ5z6R_EbOe4JIYnYvxj6Csi5wBg3lgQhYQLNlN35CKkBsPwsnwzLCo8FlQiWykjjtfIyvO2iEU72dHW5oQZPTBobBxOy0R1pQ9dAuEJ1rPqqW17clYttLq4AvRNmgwqEgAcoWcggOzOw59QBsoY9PcMVrV0qJdKJ4fk_SR-UemroVHDPJhehYvNK65k7WRW-C-a_OSYSoebTou3z8KibFeLuzKV9JNEZ0FDyA)
 
 ### Mysql入门，基础增删改查操作
 /demo.sql
